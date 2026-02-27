@@ -1,9 +1,18 @@
 import { create } from "zustand";
 import scenarios from "@/data/scenarios.json";
 
+export interface Character {
+  name: string;
+  role: string;
+  location: string;
+  avatar: string;
+  threat: "low" | "medium" | "high";
+}
+
 export interface Scenario {
   id: number;
   day: number;
+  character: Character;
   text: string;
   accept: { wealth: number; fear: number; heat: number; loyalty: number };
   reject: { wealth: number; fear: number; heat: number; loyalty: number };

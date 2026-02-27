@@ -1,110 +1,234 @@
 "use client";
 
-import { motion, useAnimation, PanInfo } from "framer-motion";
-import { useRef } from "react";
+import { motion, useMotionValue, useTransform, useAnimation, PanInfo } from "framer-motion";
+import { useRef, useState } from "react";
+import Image from "next/image";
 import { Scenario } from "@/store/useGameStore";
 
 interface SwipeCardProps {
   scenario: Scenario;
+  nextScenario?: Scenario | null;
   onSwipe: (direction: "left" | "right") => void;
 }
 
-export function SwipeCard({ scenario, onSwipe }: SwipeCardProps) {
+const THREAT_COLORS: Record<string, string> = {
+  low: "#22c55e",
+  medium: "#f59e0b",
+  high: "#ef4444",
+};
+
+const THREAT_LABELS: Record<string, string> = {
+  low: "Low Threat",
+  medium: "Caution",
+  high: "Dangerous",
+};
+
+export function SwipeCard({ scenario, nextScenario, onSwipe }: SwipeCardProps) {
   const controls = useAnimation();
+  const x = useMotionValue(0);
   const isDragging = useRef(false);
+  const [decision, setDecision] = useState<"accept" | "reject" | null>(null);
+
+  // Rotation: tilt card as it drags
+  const rotate = useTransform(x, [-200, 0, 200], [-18, 0, 18]);
+
+  // Color overlays
+  const acceptOpacity = useTransform(x, [0, 100], [0, 1]);
+  const rejectOpacity = useTransform(x, [-100, 0], [1, 0]);
 
   const triggerSwipe = async (direction: "left" | "right") => {
-    const x = direction === "right" ? 1000 : -1000;
-    await controls.start({ x, opacity: 0, transition: { duration: 0.3 } });
+    const targetX = direction === "right" ? 1200 : -1200;
+    setDecision(direction === "right" ? "accept" : "reject");
+    await controls.start({
+      x: targetX,
+      rotate: direction === "right" ? 25 : -25,
+      opacity: 0,
+      transition: { duration: 0.38, ease: "easeIn" },
+    });
     onSwipe(direction);
-    await controls.set({ x: 0, opacity: 1 });
+    x.set(0);
+    setDecision(null);
+    await controls.set({ x: 0, rotate: 0, opacity: 1 });
   };
 
   const handleDragEnd = async (_: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
-    const threshold = 100;
+    isDragging.current = false;
+    const threshold = 90;
     if (info.offset.x > threshold) {
       await triggerSwipe("right");
     } else if (info.offset.x < -threshold) {
       await triggerSwipe("left");
     } else {
-      controls.start({ x: 0, rotate: 0, transition: { type: "spring", stiffness: 300, damping: 20 } });
+      controls.start({ x: 0, rotate: 0, transition: { type: "spring", stiffness: 400, damping: 28 } });
+      setDecision(null);
     }
-    isDragging.current = false;
   };
 
-  return (
-    <div className="flex flex-col items-center gap-6 w-full select-none">
-      {/* Hint labels */}
-      <div className="flex justify-between w-full px-8 absolute top-1/3 pointer-events-none z-10">
-        <div className="text-green-400 font-black text-2xl border-4 border-green-400 rounded-lg px-3 py-1 opacity-60 -rotate-15">
-          YES ✓
-        </div>
-        <div className="text-red-500 font-black text-2xl border-4 border-red-500 rounded-lg px-3 py-1 opacity-60 rotate-15">
-          NO ✗
-        </div>
-      </div>
+  const handleDrag = (_: unknown, info: PanInfo) => {
+    if (info.offset.x > 30) setDecision("accept");
+    else if (info.offset.x < -30) setDecision("reject");
+    else setDecision(null);
+  };
 
-      {/* Card */}
+  const threatColor = THREAT_COLORS[scenario.character.threat];
+  const threatLabel = THREAT_LABELS[scenario.character.threat];
+
+  return (
+    <div className="card-stack-root">
+      {/* Ghost card 2 (furthest back) */}
+      {nextScenario && (
+        <div className="ghost-card ghost-card-2">
+          <Image
+            src={nextScenario.character.avatar}
+            alt=""
+            fill
+            className="ghost-portrait"
+            style={{ objectFit: "cover" }}
+            unoptimized
+          />
+          <div className="ghost-overlay" />
+        </div>
+      )}
+
+      {/* Ghost card 1 (one behind) */}
+      {nextScenario && (
+        <div className="ghost-card ghost-card-1">
+          <Image
+            src={nextScenario.character.avatar}
+            alt=""
+            fill
+            className="ghost-portrait"
+            style={{ objectFit: "cover" }}
+            unoptimized
+          />
+          <div className="ghost-overlay" />
+        </div>
+      )}
+
+      {/* ── MAIN CARD ── */}
       <motion.div
+        className="main-card"
+        style={{ x, rotate }}
+        animate={controls}
         drag="x"
         dragConstraints={{ left: 0, right: 0 }}
-        dragElastic={0.8}
-        animate={controls}
+        dragElastic={0.85}
         onDragStart={() => { isDragging.current = true; }}
+        onDrag={handleDrag}
         onDragEnd={handleDragEnd}
-        whileDrag={{ scale: 1.05 }}
-        style={{ cursor: "grab" }}
-        className="relative w-full max-w-sm mx-auto"
+        whileDrag={{ scale: 1.03, cursor: "grabbing" }}
+        initial={{ scale: 1, opacity: 1 }}
       >
-        {/* Card glow */}
-        <div className="absolute inset-0 rounded-3xl bg-linear-to-b from-red-900/30 to-transparent blur-xl opacity-60 pointer-events-none" />
+        {/* ── PORTRAIT AREA ── */}
+        <div className="card-portrait-wrap">
+          <Image
+            src={scenario.character.avatar}
+            alt={scenario.character.name}
+            fill
+            className="card-portrait-img"
+            style={{ objectFit: "cover", objectPosition: "top center" }}
+            unoptimized
+            priority
+          />
 
-        {/* Card body */}
-        <div className="relative bg-[#1c1c1e] border border-red-900/40 rounded-3xl p-8 shadow-2xl min-h-[350px] flex flex-col justify-between">
-          {/* Day badge */}
-          <div className="flex items-center gap-2 mb-6">
-            <span className="bg-red-900/50 text-red-400 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full border border-red-800/50">
-              Day {scenario.day}
-            </span>
+          {/* Cinematic gradient fade over portrait */}
+          <div className="portrait-gradient" />
+
+          {/* Threat badge */}
+          <div className="threat-badge" style={{ borderColor: threatColor, color: threatColor }}>
+            <span className="threat-dot" style={{ background: threatColor }} />
+            {threatLabel}
           </div>
 
-          {/* Scenario text */}
-          <p className="text-lg text-gray-100 font-medium leading-relaxed flex-1">
-            {scenario.text}
-          </p>
+          {/* Day badge */}
+          <div className="day-badge">DAY {scenario.day}</div>
 
-          {/* Swipe directions */}
-          <div className="flex justify-between mt-8 text-sm text-gray-500">
-            <div className="flex flex-col items-center gap-1">
-              <span className="text-2xl">←</span>
-              <span className="text-red-500 font-bold">REFUSE</span>
-            </div>
-            <div className="flex flex-col items-center gap-1 text-center">
-              <span className="text-gray-600 text-xs">Drag to decide</span>
-            </div>
-            <div className="flex flex-col items-center gap-1">
-              <span className="text-2xl">→</span>
-              <span className="text-green-500 font-bold">ACCEPT</span>
+          {/* ACCEPT stamp */}
+          <motion.div
+            className="stamp stamp-accept"
+            style={{ opacity: acceptOpacity }}
+          >
+            ✓ ACCEPT
+          </motion.div>
+
+          {/* REJECT stamp */}
+          <motion.div
+            className="stamp stamp-reject"
+            style={{ opacity: rejectOpacity }}
+          >
+            ✗ REFUSE
+          </motion.div>
+
+          {/* Character name overlay at bottom of portrait */}
+          <div className="portrait-name-area">
+            <h2 className="char-name">{scenario.character.name}</h2>
+            <div className="char-meta">
+              <span className="char-role">{scenario.character.role}</span>
+              <span className="char-sep">·</span>
+              <span className="char-location">📍 {scenario.character.location}</span>
             </div>
           </div>
         </div>
+
+        {/* ── SCENARIO TEXT AREA ── */}
+        <div className="card-text-area">
+          <p className="scenario-text">&ldquo;{scenario.text}&rdquo;</p>
+
+          {/* Stat preview hints */}
+          <div className="stat-hints">
+            <div className="hint-side hint-left">
+              <span className="hint-label">IF REFUSED</span>
+              <div className="hint-deltas">
+                {Object.entries(scenario.reject).map(([k, v]) => v !== 0 && (
+                  <span key={k} className={`delta ${v > 0 ? "delta-up" : "delta-down"}`}>
+                    {v > 0 ? "+" : ""}{v} {k === "wealth" ? "💰" : k === "fear" ? "🩸" : k === "heat" ? "🚓" : "🤝"}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div className="hint-side hint-right">
+              <span className="hint-label">IF ACCEPTED</span>
+              <div className="hint-deltas">
+                {Object.entries(scenario.accept).map(([k, v]) => v !== 0 && (
+                  <span key={k} className={`delta ${v > 0 ? "delta-up" : "delta-down"}`}>
+                    {v > 0 ? "+" : ""}{v} {k === "wealth" ? "💰" : k === "fear" ? "🩸" : k === "heat" ? "🚓" : "🤝"}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Decision color-wash overlay */}
+        {decision === "accept" && <div className="decision-wash accept-wash" />}
+        {decision === "reject" && <div className="decision-wash reject-wash" />}
       </motion.div>
 
-      {/* Tap Buttons for non-swipe */}
-      <div className="flex gap-6 mt-2">
-        <button
+      {/* ── SWIPE BUTTONS ── */}
+      <div className="swipe-buttons">
+        <motion.button
+          className="swipe-btn refuse-btn"
           onClick={() => triggerSwipe("left")}
-          className="w-16 h-16 rounded-full bg-red-900/40 border border-red-700 flex items-center justify-center text-2xl hover:bg-red-800/60 active:scale-95 transition-all"
+          whileHover={{ scale: 1.12, boxShadow: "0 0 24px rgba(239,68,68,0.6)" }}
+          whileTap={{ scale: 0.92 }}
         >
-          ✗
-        </button>
-        <button
+          <span>✗</span>
+          <span className="btn-label">REFUSE</span>
+        </motion.button>
+
+        <motion.button
+          className="swipe-btn accept-btn"
           onClick={() => triggerSwipe("right")}
-          className="w-16 h-16 rounded-full bg-green-900/40 border border-green-700 flex items-center justify-center text-2xl hover:bg-green-800/60 active:scale-95 transition-all"
+          whileHover={{ scale: 1.12, boxShadow: "0 0 24px rgba(34,197,94,0.6)" }}
+          whileTap={{ scale: 0.92 }}
         >
-          ✓
-        </button>
+          <span>✓</span>
+          <span className="btn-label">ACCEPT</span>
+        </motion.button>
       </div>
+
+      {/* Drag hint */}
+      <p className="drag-hint">← Drag to decide →</p>
     </div>
   );
 }

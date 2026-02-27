@@ -1,106 +1,106 @@
 [
   {
-    "id": 1,
-    "day": 1,
-    "text": "A local MLA from Hubli demands a 15% cut of our Bellary mining operations. Pay him?",
+    "id": 1, "day": 1,
+    "character": { "name": "Ramesh Naik", "role": "Local MLA", "location": "Hubli", "avatar": "/chars/mla.png", "threat": "medium" },
+    "text": "A local MLA from Hubli demands a 15% cut of our Bellary mining operations. He's smiling, but it's not a friendly smile.",
     "accept": { "wealth": -15, "fear": 0, "heat": -10, "loyalty": 5 },
     "reject": { "wealth": 0, "fear": 5, "heat": 15, "loyalty": -5 }
   },
   {
-    "id": 2,
-    "day": 2,
-    "text": "Rival don Shankar Gouda from Koppal is moving iron ore trucks through our territory. Let them pass... for a toll?",
+    "id": 2, "day": 2,
+    "character": { "name": "Shankar Gouda", "role": "Rival Don", "location": "Koppal", "avatar": "/chars/rival_don.png", "threat": "high" },
+    "text": "Shankar Gouda from Koppal is moving iron ore trucks through our territory. He wants to pass — for a toll. His convoy is armed.",
     "accept": { "wealth": 10, "fear": -5, "heat": 5, "loyalty": 0 },
     "reject": { "wealth": 0, "fear": 15, "heat": 10, "loyalty": 5 }
   },
   {
-    "id": 3,
-    "day": 3,
-    "text": "Three of your lieutenants want a salary hike. They're your best men. Agree?",
+    "id": 3, "day": 3,
+    "character": { "name": "The Crew", "role": "Senior Lieutenants", "location": "HQ", "avatar": "/chars/lieutenant.png", "threat": "medium" },
+    "text": "Three of your best lieutenants want a salary hike. They've been loyal — but loyalty has its price. Agree?",
     "accept": { "wealth": -10, "fear": 0, "heat": 0, "loyalty": 20 },
     "reject": { "wealth": 0, "fear": 5, "heat": 0, "loyalty": -15 }
   },
   {
-    "id": 4,
-    "day": 4,
-    "text": "A desperate widow pleads to return her husband's confiscated truck. It's worth ₹4 lakh. Release it?",
+    "id": 4, "day": 4,
+    "character": { "name": "Savitri Bai", "role": "Widow", "location": "Gadag", "avatar": "/chars/widow.png", "threat": "low" },
+    "text": "A desperate widow pleads to return her late husband's confiscated truck — worth ₹4 lakh. Her children are hungry. Release it?",
     "accept": { "wealth": -5, "fear": -10, "heat": -5, "loyalty": 10 },
     "reject": { "wealth": 5, "fear": 5, "heat": 0, "loyalty": -10 }
   },
   {
-    "id": 5,
-    "day": 5,
-    "text": "Your informant says a DSP is building a case against you. You can bribe him for ₹10 lakh. Do it?",
+    "id": 5, "day": 5,
+    "character": { "name": "DSP Mallikarjun", "role": "Deputy Superintendent", "location": "Bellary District", "avatar": "/chars/dsp.png", "threat": "high" },
+    "text": "Your informant says DSP Mallikarjun is building a case against you. He can be silenced for ₹10 lakh. Do it?",
     "accept": { "wealth": -15, "fear": 0, "heat": -20, "loyalty": 0 },
     "reject": { "wealth": 0, "fear": 10, "heat": 20, "loyalty": 0 }
   },
   {
-    "id": 6,
-    "day": 6,
-    "text": "A rival gang firebombed our warehouse in Gadag. The crew demands retaliation. Authorize the strike?",
+    "id": 6, "day": 6,
+    "character": { "name": "Victor Rathod", "role": "Enforcer", "location": "Gadag Warehouse", "avatar": "/chars/lieutenant.png", "threat": "high" },
+    "text": "A rival gang firebombed our warehouse in Gadag. Victor and the crew demand retaliation. One word from you and they move.",
     "accept": { "wealth": -10, "fear": 20, "heat": 15, "loyalty": 15 },
     "reject": { "wealth": 0, "fear": -15, "heat": 0, "loyalty": -20 }
   },
   {
-    "id": 7,
-    "day": 7,
-    "text": "A smooth-talking journalist offers a 'favorable profile' in exchange for exclusive access. Grant it?",
+    "id": 7, "day": 7,
+    "character": { "name": "Ananya Rao", "role": "Senior Journalist", "location": "Dharwad Press Club", "avatar": "/chars/journalist.png", "threat": "medium" },
+    "text": "Journalist Ananya Rao offers a 'favorable profile' in exchange for exclusive access. Exposure — or intelligence? Grant it?",
     "accept": { "wealth": 0, "fear": -10, "heat": 10, "loyalty": 0 },
     "reject": { "wealth": 0, "fear": 5, "heat": -5, "loyalty": 5 }
   },
   {
-    "id": 8,
-    "day": 8,
-    "text": "Your chief explosives handler wants out — he has a family. Let him leave cleanly with a payout?",
+    "id": 8, "day": 8,
+    "character": { "name": "Raju Shetty", "role": "Explosives Handler", "location": "Mines", "avatar": "/chars/lieutenant.png", "threat": "low" },
+    "text": "Your chief explosives handler Raju wants out — he has a family now. Let him leave cleanly with a payout?",
     "accept": { "wealth": -10, "fear": -5, "heat": -10, "loyalty": 5 },
     "reject": { "wealth": 0, "fear": 10, "heat": 5, "loyalty": -10 }
   },
   {
-    "id": 9,
-    "day": 9,
-    "text": "A Dharwad contractor is offering a huge public works tender — it requires setting up a shell company. Take it?",
+    "id": 9, "day": 9,
+    "character": { "name": "Prasad Kulkarni", "role": "Civil Contractor", "location": "Dharwad", "avatar": "/chars/contractor.png", "threat": "medium" },
+    "text": "Contractor Kulkarni offers a massive public works tender — it requires setting up a shell company under your name. Take it?",
     "accept": { "wealth": 20, "fear": 0, "heat": 10, "loyalty": 0 },
     "reject": { "wealth": 0, "fear": 0, "heat": -5, "loyalty": 5 }
   },
   {
-    "id": 10,
-    "day": 10,
-    "text": "A street boy who ran errands for you was arrested. His mother begs you to use your connections to free him. Help?",
+    "id": 10, "day": 10,
+    "character": { "name": "Lakshmi Devi", "role": "Mother", "location": "Bidar", "avatar": "/chars/widow.png", "threat": "low" },
+    "text": "A street boy who ran errands for you was arrested. His mother Lakshmi Devi is at your door begging you to free him. Help?",
     "accept": { "wealth": -5, "fear": -5, "heat": 10, "loyalty": 15 },
     "reject": { "wealth": 0, "fear": 5, "heat": 0, "loyalty": -20 }
   },
   {
-    "id": 11,
-    "day": 11,
-    "text": "The Bidar syndicate proposes a shared smuggling route to Goa. A powerful alliance, but you lose exclusivity. Partner up?",
+    "id": 11, "day": 11,
+    "character": { "name": "Dawood Mirza", "role": "Bidar Syndicate Boss", "location": "Bidar", "avatar": "/chars/rival_don.png", "threat": "high" },
+    "text": "The Bidar syndicate boss Dawood proposes a shared smuggling route to Goa. Powerful alliance — you lose exclusivity. Partner up?",
     "accept": { "wealth": 15, "fear": 0, "heat": 5, "loyalty": -5 },
     "reject": { "wealth": 0, "fear": 10, "heat": 0, "loyalty": 5 }
   },
   {
-    "id": 12,
-    "day": 12,
-    "text": "A corrupt municipality officer wants a fixed monthly payoff to look away from your stone quarry. Pay the 'rent'?",
+    "id": 12, "day": 12,
+    "character": { "name": "Mohan Nayak", "role": "Municipality Officer", "location": "Stone Quarry", "avatar": "/chars/contractor.png", "threat": "medium" },
+    "text": "Municipality officer Nayak wants a fixed monthly payoff to look away from our stone quarry. Pay the 'rent'?",
     "accept": { "wealth": -10, "fear": 0, "heat": -15, "loyalty": 0 },
     "reject": { "wealth": 0, "fear": 0, "heat": 15, "loyalty": 0 }
   },
   {
-    "id": 13,
-    "day": 13,
-    "text": "One of your top men is skimming from the collections. You can make an example of him, publicly. Do it?",
+    "id": 13, "day": 13,
+    "character": { "name": "Kiran Patil", "role": "Collection Runner", "location": "Inner Circle", "avatar": "/chars/lieutenant.png", "threat": "high" },
+    "text": "Kiran has been skimming from collections. You can make a brutal public example of him — or let it slide. Do it?",
     "accept": { "wealth": 10, "fear": 20, "heat": 10, "loyalty": 5 },
     "reject": { "wealth": -10, "fear": -5, "heat": 0, "loyalty": -10 }
   },
   {
-    "id": 14,
-    "day": 14,
-    "text": "A young police sub-inspector wants to secretly become your mole. The risk is high. Recruit him?",
+    "id": 14, "day": 14,
+    "character": { "name": "SI Suresh Kumar", "role": "Police Sub-Inspector", "location": "Bellary", "avatar": "/chars/young_cop.png", "threat": "medium" },
+    "text": "Young Sub-Inspector Suresh wants to secretly become your mole inside the police station. The risk is extreme. Recruit him?",
     "accept": { "wealth": 0, "fear": 5, "heat": -20, "loyalty": 0 },
     "reject": { "wealth": 0, "fear": 0, "heat": 10, "loyalty": 5 }
   },
   {
-    "id": 15,
-    "day": 15,
-    "text": "The festival of Dasara is here. The locals expect your 'donation' for the celebrations. Be generous this year?",
+    "id": 15, "day": 15,
+    "character": { "name": "The People", "role": "North Karnataka Citizens", "location": "Mysuru Road", "avatar": "/chars/widow.png", "threat": "low" },
+    "text": "Dasara is here. The streets expect your 'donation' for the celebrations. The whole region is watching. Be generous?",
     "accept": { "wealth": -15, "fear": -10, "heat": -10, "loyalty": 10 },
     "reject": { "wealth": 0, "fear": 5, "heat": 5, "loyalty": -5 }
   }
