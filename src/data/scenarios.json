@@ -1,0 +1,107 @@
+[
+  {
+    "id": 1,
+    "day": 1,
+    "text": "A local MLA from Hubli demands a 15% cut of our Bellary mining operations. Pay him?",
+    "accept": { "wealth": -15, "fear": 0, "heat": -10, "loyalty": 5 },
+    "reject": { "wealth": 0, "fear": 5, "heat": 15, "loyalty": -5 }
+  },
+  {
+    "id": 2,
+    "day": 2,
+    "text": "Rival don Shankar Gouda from Koppal is moving iron ore trucks through our territory. Let them pass... for a toll?",
+    "accept": { "wealth": 10, "fear": -5, "heat": 5, "loyalty": 0 },
+    "reject": { "wealth": 0, "fear": 15, "heat": 10, "loyalty": 5 }
+  },
+  {
+    "id": 3,
+    "day": 3,
+    "text": "Three of your lieutenants want a salary hike. They're your best men. Agree?",
+    "accept": { "wealth": -10, "fear": 0, "heat": 0, "loyalty": 20 },
+    "reject": { "wealth": 0, "fear": 5, "heat": 0, "loyalty": -15 }
+  },
+  {
+    "id": 4,
+    "day": 4,
+    "text": "A desperate widow pleads to return her husband's confiscated truck. It's worth ₹4 lakh. Release it?",
+    "accept": { "wealth": -5, "fear": -10, "heat": -5, "loyalty": 10 },
+    "reject": { "wealth": 5, "fear": 5, "heat": 0, "loyalty": -10 }
+  },
+  {
+    "id": 5,
+    "day": 5,
+    "text": "Your informant says a DSP is building a case against you. You can bribe him for ₹10 lakh. Do it?",
+    "accept": { "wealth": -15, "fear": 0, "heat": -20, "loyalty": 0 },
+    "reject": { "wealth": 0, "fear": 10, "heat": 20, "loyalty": 0 }
+  },
+  {
+    "id": 6,
+    "day": 6,
+    "text": "A rival gang firebombed our warehouse in Gadag. The crew demands retaliation. Authorize the strike?",
+    "accept": { "wealth": -10, "fear": 20, "heat": 15, "loyalty": 15 },
+    "reject": { "wealth": 0, "fear": -15, "heat": 0, "loyalty": -20 }
+  },
+  {
+    "id": 7,
+    "day": 7,
+    "text": "A smooth-talking journalist offers a 'favorable profile' in exchange for exclusive access. Grant it?",
+    "accept": { "wealth": 0, "fear": -10, "heat": 10, "loyalty": 0 },
+    "reject": { "wealth": 0, "fear": 5, "heat": -5, "loyalty": 5 }
+  },
+  {
+    "id": 8,
+    "day": 8,
+    "text": "Your chief explosives handler wants out — he has a family. Let him leave cleanly with a payout?",
+    "accept": { "wealth": -10, "fear": -5, "heat": -10, "loyalty": 5 },
+    "reject": { "wealth": 0, "fear": 10, "heat": 5, "loyalty": -10 }
+  },
+  {
+    "id": 9,
+    "day": 9,
+    "text": "A Dharwad contractor is offering a huge public works tender — it requires setting up a shell company. Take it?",
+    "accept": { "wealth": 20, "fear": 0, "heat": 10, "loyalty": 0 },
+    "reject": { "wealth": 0, "fear": 0, "heat": -5, "loyalty": 5 }
+  },
+  {
+    "id": 10,
+    "day": 10,
+    "text": "A street boy who ran errands for you was arrested. His mother begs you to use your connections to free him. Help?",
+    "accept": { "wealth": -5, "fear": -5, "heat": 10, "loyalty": 15 },
+    "reject": { "wealth": 0, "fear": 5, "heat": 0, "loyalty": -20 }
+  },
+  {
+    "id": 11,
+    "day": 11,
+    "text": "The Bidar syndicate proposes a shared smuggling route to Goa. A powerful alliance, but you lose exclusivity. Partner up?",
+    "accept": { "wealth": 15, "fear": 0, "heat": 5, "loyalty": -5 },
+    "reject": { "wealth": 0, "fear": 10, "heat": 0, "loyalty": 5 }
+  },
+  {
+    "id": 12,
+    "day": 12,
+    "text": "A corrupt municipality officer wants a fixed monthly payoff to look away from your stone quarry. Pay the 'rent'?",
+    "accept": { "wealth": -10, "fear": 0, "heat": -15, "loyalty": 0 },
+    "reject": { "wealth": 0, "fear": 0, "heat": 15, "loyalty": 0 }
+  },
+  {
+    "id": 13,
+    "day": 13,
+    "text": "One of your top men is skimming from the collections. You can make an example of him, publicly. Do it?",
+    "accept": { "wealth": 10, "fear": 20, "heat": 10, "loyalty": 5 },
+    "reject": { "wealth": -10, "fear": -5, "heat": 0, "loyalty": -10 }
+  },
+  {
+    "id": 14,
+    "day": 14,
+    "text": "A young police sub-inspector wants to secretly become your mole. The risk is high. Recruit him?",
+    "accept": { "wealth": 0, "fear": 5, "heat": -20, "loyalty": 0 },
+    "reject": { "wealth": 0, "fear": 0, "heat": 10, "loyalty": 5 }
+  },
+  {
+    "id": 15,
+    "day": 15,
+    "text": "The festival of Dasara is here. The locals expect your 'donation' for the celebrations. Be generous this year?",
+    "accept": { "wealth": -15, "fear": -10, "heat": -10, "loyalty": 10 },
+    "reject": { "wealth": 0, "fear": 5, "heat": 5, "loyalty": -5 }
+  }
+]
